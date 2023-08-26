@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Ground
+  - CameraConfiner
+  - 
+  - Hittable
+  - Weapons
+  - 
+  - SpawnPoints
+  - Pickable
+  - Enemies
+  - AgentCollider
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1017395965
+    locked: 0
+  - name: ExitsScenes
+    uniqueID: 3748028051
+    locked: 0
+  - name: Agents
+    uniqueID: 3742480647
+    locked: 0
+  - name: Player
+    uniqueID: 4190633257
+    locked: 0
+  - name: Weapons
+    uniqueID: 2478995463
+    locked: 0
+  - name: Front
+    uniqueID: 677002593
+    locked: 0
+  - name: Pickable
+    uniqueID: 989571433
+    locked: 0
+  - name: UI
+    uniqueID: 1828938275
+    locked: 0
