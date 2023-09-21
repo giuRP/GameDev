@@ -1,3 +1,4 @@
+using PI4.BulletSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,8 @@ public class Agent : MonoBehaviour
     public AgentAnimation animationManager;
     public AgentRenderer agentRenderer;
 
-    //[HideInInspector]
-    //public AgentWeaponManager agentWeapon;
+    [HideInInspector]
+    public AgentBulletManager agentBulletManager;
 
     //private Damageable damageable;
 
@@ -39,7 +40,7 @@ public class Agent : MonoBehaviour
 
         //groundDetector = GetComponentInChildren<GroundDetector>();
         //climbingDetector = GetComponentInChildren<ClimbingDetector>();
-        //agentWeapon = GetComponentInChildren<AgentWeaponManager>();
+        agentBulletManager = GetComponentInChildren<AgentBulletManager>();
         stateFactory = GetComponentInChildren<StateFactory>();
         //damageable = GetComponent<Damageable>();
 
@@ -48,7 +49,6 @@ public class Agent : MonoBehaviour
 
     private void Start()
     {
-        //agentInput.OnMovement += agentRenderer.FaceDirection;
         InitializeAgent();
 
         //agentInput.OnWeaponChange += SwapWeapon;
@@ -56,7 +56,7 @@ public class Agent : MonoBehaviour
 
     private void InitializeAgent()
     {
-        TransitionToState(stateFactory.GetState(StateType.IdleOrMovement));
+        TransitionToState(stateFactory.GetState(StateType.IdleOrMovementAndAttack));
         //damageable.InitializeHealth(agentData.health);
     }
 
@@ -67,7 +67,6 @@ public class Agent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //groundDetector.CheckIsGrounded();
         currentState.StateFixedUpdate();
     }
 
@@ -92,5 +91,17 @@ public class Agent : MonoBehaviour
         {
             stateName = currentState.GetType().ToString();
         }
+    }
+
+    public void AgentDied() //callback em um evento do damageable
+    {
+        //if (damageable.CurrentHealth > 0)
+        //{
+        //    OnRespawnRequired?.Invoke();
+        //}
+        //else
+        //{
+        //    currentState.HandleDie();
+        //}
     }
 }

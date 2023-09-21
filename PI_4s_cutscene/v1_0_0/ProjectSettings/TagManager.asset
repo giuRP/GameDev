@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - PlayerConfiner
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - CameraConfiner
+  - PlayerConfiner
   - 
   - Hittable
   - Weapons
@@ -47,14 +49,14 @@ TagManager:
   - name: ExitsScenes
     uniqueID: 3748028051
     locked: 0
+  - name: Weapons
+    uniqueID: 2478995463
+    locked: 0
   - name: Agents
     uniqueID: 3742480647
     locked: 0
   - name: Player
     uniqueID: 4190633257
-    locked: 0
-  - name: Weapons
-    uniqueID: 2478995463
     locked: 0
   - name: Front
     uniqueID: 677002593

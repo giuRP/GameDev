@@ -1,3 +1,4 @@
+using PI4.RespawnSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,4 +16,8 @@ public class AgentDataSO : ScriptableObject
     public float maxSpeed = 6;
     public float acceleration = 50;
     public float deacceleration = 50;
+
+    [Header("Bullet Data")]
+    [Space]
+    public GameObject bullet;
 }

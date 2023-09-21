@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthUI : MonoBehaviour
 {
-    private List<LifeElementUI> heartImages;
+    private List<LifeElementUI> healthImages;
 
     [SerializeField]
     private Sprite fullHeart, emptyHeart;
@@ -14,7 +14,7 @@ public class HealthUI : MonoBehaviour
 
     public void Initialize(int maxHealth)
     {
-        heartImages = new List<LifeElementUI>();
+        healthImages = new List<LifeElementUI>();
 
         foreach (Transform child in transform)
         {
@@ -25,21 +25,21 @@ public class HealthUI : MonoBehaviour
         {
             var life = Instantiate(heartPrefab);
             life.transform.SetParent(transform, false);
-            heartImages.Add(life);
+            healthImages.Add(life);
         }
     }
 
     public void SetHealth(int currentHealth)
     {
-        for (int i = 0; i < heartImages.Count; i++)
+        for (int i = 0; i < healthImages.Count; i++)
         {
             if (i < currentHealth)
             {
-                heartImages[i].SetSprite(fullHeart);
+                healthImages[i].SetSprite(fullHeart);
             }
             else
             {
-                heartImages[i].SetSprite(emptyHeart);
+                healthImages[i].SetSprite(emptyHeart);
             }
         }
     }

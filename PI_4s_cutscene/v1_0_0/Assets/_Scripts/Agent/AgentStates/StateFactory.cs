@@ -5,13 +5,11 @@ using UnityEngine;
 public class StateFactory : MonoBehaviour
 {
     [SerializeField]
-    private State IdleOrMovement, MoveBack, Attack, GetHit, Die;
+    private State IdleOrMovementAndAttack, GetHit, Die;
 
     public State GetState(StateType stateType) => stateType switch
     {
-        StateType.IdleOrMovement => IdleOrMovement,
-        StateType.MoveBack => MoveBack,
-        StateType.Attack => Attack,
+        StateType.IdleOrMovementAndAttack => IdleOrMovementAndAttack,
         StateType.GetHit => GetHit,
         StateType.Die => Die,
         _ => throw new System.Exception("State not defined " + stateType.ToString())
@@ -28,9 +26,7 @@ public class StateFactory : MonoBehaviour
 }
 public enum StateType
 {
-    IdleOrMovement,
-    MoveBack,
-    Attack,
+    IdleOrMovementAndAttack,
     GetHit,
     Die
 }

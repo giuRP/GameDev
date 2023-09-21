@@ -30,18 +30,9 @@ public class AgentAnimation : MonoBehaviour
                 Play("GetHit");
                 break;
 
-            case AnimationType.idleOrMovement:
+            case AnimationType.idleOrMovementAndAttack:
                 currentAnimation = "Idle";
                 Play("Idle");
-                break;
-
-            case AnimationType.attack:
-                Play("Attack");
-                break;
-
-            case AnimationType.moveBack:
-                currentAnimation = "MoveBack";
-                Play("MoveBack");
                 break;
 
             default:
@@ -84,7 +75,5 @@ public enum AnimationType
 {
     die,
     hit,
-    idleOrMovement,
-    attack,
-    moveBack
+    idleOrMovementAndAttack
 }

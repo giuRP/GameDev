@@ -18,8 +18,6 @@ public abstract class State : MonoBehaviour
     public void Enter()
     {
         this.agent.agentInput.OnAttack += HandleAttack;
-        this.agent.agentInput.OnMoveBackPressed += HandleMoveBackPressed;
-        this.agent.agentInput.OnMoveBackReleased += HandleMoveBackReleased;
         this.agent.agentInput.OnMovement += HandleMovement;
 
         OnEnter?.Invoke();
@@ -44,18 +42,9 @@ public abstract class State : MonoBehaviour
     {
     }
 
-    protected virtual void HandleMoveBackPressed()
-    {
-        
-    }
-
-    protected virtual void HandleMoveBackReleased()
-    {
-    }
-
     protected virtual void HandleAttack()
     {
-        //TestAttackTransition();
+        
     }
 
     public virtual void HandleGetHit()
@@ -71,8 +60,6 @@ public abstract class State : MonoBehaviour
     public void Exit()
     {
         this.agent.agentInput.OnAttack -= HandleAttack;
-        this.agent.agentInput.OnMoveBackPressed += HandleMoveBackPressed;
-        this.agent.agentInput.OnMoveBackReleased += HandleMoveBackReleased;
         this.agent.agentInput.OnMovement -= HandleMovement;
 
         OnExit?.Invoke();
