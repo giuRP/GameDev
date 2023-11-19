@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198d57b4fad5eaf43bdc1cf7e5cece3d, type: 3}
+  m_Name: FireBreath
+  m_EditorClassIdentifier: 
+  bulletName: Fire Breath
+  damage: 1
+  range: 4
+  throwSpeed: 0
+  durationTime: 0
+  attackCoolDown: 2.3
+  prefab: {fileID: 2796091542225962721, guid: 148290e4987e54b4bb29e64907b9a3d2, type: 3}
+  sprite: {fileID: 1368156295, guid: 4f01def3748c495488779c6e480c9cf8, type: 3}
+  shootSound: {fileID: 0}

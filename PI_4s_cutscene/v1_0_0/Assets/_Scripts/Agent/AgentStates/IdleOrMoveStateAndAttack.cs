@@ -9,11 +9,13 @@ public class IdleOrMoveStateAndAttack : State
 {
     [SerializeField]
     protected MovementData movementData;
-
     public UnityEvent OnStep;
-    public UnityEvent<AudioClip> OnShootSound;
 
-    protected Vector2 shootDirection;
+    public UnityEvent OnGetHit;
+
+    private bool canAttack = true;
+
+    public UnityEvent<AudioClip> OnShootSound;
     public LayerMask hittableLayerMask;
 
     private void Awake()
@@ -27,8 +29,6 @@ public class IdleOrMoveStateAndAttack : State
         agent.animationManager.OnAnimationAction.AddListener(() => OnStep.Invoke());
 
         movementData.currentVelocity = agent.rb2d.velocity;
-
-        shootDirection = agent.transform.right;
     }
 
     public override void StateUpdate()
@@ -51,14 +51,14 @@ public class IdleOrMoveStateAndAttack : State
     {
         if (Mathf.Abs(movementDirection.x) > 0 || Mathf.Abs(movementDirection.y) > 0)
         {
-            movementData.currentSpeed += agent.agentData.acceleration * Time.deltaTime;
+            movementData.currentSpeed += agent.data.acceleration * Time.deltaTime;
         }
         else
         {
-            movementData.currentSpeed -= agent.agentData.deacceleration * Time.deltaTime;
+            movementData.currentSpeed -= agent.data.deacceleration * Time.deltaTime;
         }
 
-        movementData.currentSpeed = Mathf.Clamp(movementData.currentSpeed, 0, agent.agentData.maxSpeed);
+        movementData.currentSpeed = Mathf.Clamp(movementData.currentSpeed, 0, agent.data.maxSpeed);
     }
 
     protected void SetPlayerVelocity()
@@ -68,12 +68,44 @@ public class IdleOrMoveStateAndAttack : State
 
     protected override void HandleAttack()
     {
-        //OnShootSound?.Invoke(agent.agentBulletManager.GetCurrentBullet().bulletShootSound);
-        agent.agentBulletManager.GetCurrentBullet().PerformShoot(agent, shootDirection, hittableLayerMask);
+        if (!canAttack)
+            return;
+
+        canAttack = false;
+        agent.weapon.GetCurrentBullet().PerformAttack(agent, this.hittableLayerMask, agent.data.shootDirection);
+        OnShootSound?.Invoke(agent.weapon.GetCurrentBullet().shootSound);
+
+        StartCoroutine(AttackDalay());
+    }
+
+    private IEnumerator AttackDalay()
+    {
+        yield return new WaitForSeconds(agent.weapon.GetCurrentBullet().attackCoolDown);
+        canAttack = true;
+    }
+
+    public override void HandleGetHit()
+    {
+        //Imortalidade temporária
+        //Solid color shader
+        OnGetHit?.Invoke();
     }
 
     protected override void ExitState()
     {
         agent.animationManager.ResetEvents();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying == false)
+            return;
+        
+        if (agent.weapon.GetCurrentBullet() == null)
+            return;
+
+        Gizmos.color = Color.red;
+        var pos = agent.weapon.transform.position;
+        agent.weapon.GetCurrentBullet().DrawWeaponGizmo(pos, agent.data.shootDirection);
     }
 }

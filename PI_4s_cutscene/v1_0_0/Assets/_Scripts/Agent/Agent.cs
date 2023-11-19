@@ -1,4 +1,5 @@
 using PI4.BulletSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Events;
 
 public class Agent : MonoBehaviour
 {
-    public AgentDataSO agentData;
+    public AgentDataSO data;
 
     public Rigidbody2D rb2d;
     public IAgentInput agentInput;
@@ -14,16 +15,13 @@ public class Agent : MonoBehaviour
     public AgentRenderer agentRenderer;
 
     [HideInInspector]
-    public AgentBulletManager agentBulletManager;
+    public AgentWeaponManager weapon;
 
-    //private Damageable damageable;
+    private Damageable damageable;
 
     public StateFactory stateFactory;
 
     public State currentState = null, previousState = null;
-
-    [Header("State Debbuging: ")]
-    public string stateName = "";
 
     [field: SerializeField]
     private UnityEvent OnRespawnRequired { get; set; }
@@ -31,18 +29,18 @@ public class Agent : MonoBehaviour
     [field: SerializeField]
     public UnityEvent OnAgentDie { get; set; }
 
+    [Header("State Debbuging: ")]
+    public string stateName = "";
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         agentInput = GetComponentInParent<IAgentInput>();
         animationManager = GetComponentInChildren<AgentAnimation>();
         agentRenderer = GetComponentInChildren<AgentRenderer>();
-
-        //groundDetector = GetComponentInChildren<GroundDetector>();
-        //climbingDetector = GetComponentInChildren<ClimbingDetector>();
-        agentBulletManager = GetComponentInChildren<AgentBulletManager>();
+        weapon = GetComponentInChildren<AgentWeaponManager>();
         stateFactory = GetComponentInChildren<StateFactory>();
-        //damageable = GetComponent<Damageable>();
+        damageable = GetComponent<Damageable>();
 
         stateFactory.InitializeStates(this);
     }
@@ -50,14 +48,15 @@ public class Agent : MonoBehaviour
     private void Start()
     {
         InitializeAgent();
-
-        //agentInput.OnWeaponChange += SwapWeapon;
     }
 
     private void InitializeAgent()
     {
         TransitionToState(stateFactory.GetState(StateType.IdleOrMovementAndAttack));
-        //damageable.InitializeHealth(agentData.health);
+
+        damageable.InitializeHealth(data.health);
+
+        weapon.SetUpBullet(data.defaultBullet);
     }
 
     private void Update()
@@ -93,15 +92,28 @@ public class Agent : MonoBehaviour
         }
     }
 
+    public void PickUpBullet(_BulletData bulletData)
+    {
+        if (weapon == null)
+            return;
+
+        weapon.PickUpBullet(bulletData);
+    }
+
+    public void GetHitInCurrentState() //callback em um evento do damageable
+    {
+        currentState.HandleGetHit();
+    }
+
     public void AgentDied() //callback em um evento do damageable
     {
-        //if (damageable.CurrentHealth > 0)
-        //{
-        //    OnRespawnRequired?.Invoke();
-        //}
-        //else
-        //{
-        //    currentState.HandleDie();
-        //}
+        if (damageable.CurrentHealth > 0)
+        {
+            OnRespawnRequired?.Invoke();
+        }
+        else
+        {
+            currentState.HandleDie();
+        }
     }
 }

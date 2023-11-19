@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198d57b4fad5eaf43bdc1cf7e5cece3d, type: 3}
+  m_Name: LaserBeam1
+  m_EditorClassIdentifier: 
+  bulletName: LaserBeam1
+  damage: 1
+  range: 2
+  throwSpeed: 0
+  durationTime: 0
+  attackCoolDown: 1
+  prefab: {fileID: 7392645562423531730, guid: ea075957494fb1d4786597de22f37776, type: 3}
+  sprite: {fileID: 21300000, guid: 88b5f828eeb7bee4c8f1631516dc690f, type: 3}
+  shootSound: {fileID: 0}

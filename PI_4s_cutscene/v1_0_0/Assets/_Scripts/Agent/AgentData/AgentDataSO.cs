@@ -1,4 +1,4 @@
-using PI4.RespawnSystem;
+using PI4.BulletSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,5 +19,6 @@ public class AgentDataSO : ScriptableObject
 
     [Header("Bullet Data")]
     [Space]
-    public GameObject bullet;
+    public _BulletData defaultBullet;
+    public Vector2 shootDirection;
 }

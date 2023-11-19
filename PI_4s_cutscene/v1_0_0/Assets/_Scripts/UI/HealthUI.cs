@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthUI : MonoBehaviour
 {
+    [SerializeField]
     private List<LifeElementUI> healthImages;
 
     [SerializeField]

@@ -1,34 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AISystem;
 
-public class AIBehaviourPatrol : AIBehaviour
+namespace AISystem
 {
-    public AIEndPlatformDetector endPlatformDetector;
-
-    private Vector2 movementDirection = Vector2.zero;
-
-    private void Awake()
+    public class AIBehaviourPatrol : AIBehaviour
     {
-        if (endPlatformDetector == null)
-            endPlatformDetector = transform.parent.GetComponentInParent<AIEndPlatformDetector>();
-    }
+        public AIEndPlatformDetector endPlatformDetector;
 
-    private void Start()
-    {
-        endPlatformDetector.OnPathBlocked += HandlePathBlocked;
-        movementDirection = new Vector2(Random.value > 0.5f ? 1 : -1, 0);
-    }
+        private Vector2 movementDirection = Vector2.zero;
 
-    private void HandlePathBlocked()
-    {
-        movementDirection *= new Vector2(-1, 0);
-    }
+        private void Awake()
+        {
+            if (endPlatformDetector == null)
+                endPlatformDetector = transform.parent.GetComponentInParent<AIEndPlatformDetector>();
+        }
 
-    public override void PerformAction(AIEnemy enemyAI)
-    {
-        enemyAI.MovementDirection = movementDirection;
-        enemyAI.CallOnMovement(movementDirection);
+        private void Start()
+        {
+            endPlatformDetector.OnPathBlocked += HandlePathBlocked;
+            movementDirection = new Vector2(Random.value > 0.5f ? 1 : -1, 0);
+        }
+
+        private void HandlePathBlocked()
+        {
+            movementDirection *= new Vector2(-1, 0);
+        }
+
+        public override void PerformAction(AIEnemy enemyAI)
+        {
+            enemyAI.MovementDirection = movementDirection;
+            enemyAI.CallOnMovement(movementDirection);
+        }
     }
 }

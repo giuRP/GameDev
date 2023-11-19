@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour, IAgentInput
     [field : SerializeField]
     public Vector2 MovementDirection { get; private set; }
 
-    public event Action OnAttack, OnMoveBackPressed, OnMoveBackReleased;
+    public event Action OnAttack;
 
     public event Action<Vector2> OnMovement;
 
@@ -22,7 +22,6 @@ public class PlayerInput : MonoBehaviour, IAgentInput
         if (Time.timeScale > 0)
         {
             GetMovementInput();
-            GetMoveBackInput();
             GetAttackInput();
         }
 
@@ -42,19 +41,6 @@ public class PlayerInput : MonoBehaviour, IAgentInput
         if (Input.GetKeyDown(attackKey))
         {
             OnAttack?.Invoke();
-        }
-    }
-
-    private void GetMoveBackInput()
-    {
-        if (Input.GetKeyDown(KeyCode.A)) //GetMovementDirection().x < 0 
-        {
-            OnMoveBackPressed?.Invoke();
-        }
-
-        if (Input.GetKeyUp(KeyCode.A)) //GetMovementDirection().x > 0
-        {
-            OnMoveBackReleased?.Invoke();
         }
     }
 

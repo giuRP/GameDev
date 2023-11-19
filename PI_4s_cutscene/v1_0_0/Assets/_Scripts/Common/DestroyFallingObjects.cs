@@ -1,3 +1,4 @@
+using PI4.AI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,16 +25,18 @@ public class DestroyFallingObjects : MonoBehaviour
                 return;
             }
 
-            //var damageable = agent.GetComponent<Damageable>();
-            //if (damageable != null)
-            //{
-            //    damageable.Hit(1);
+            var staticBrain = agent.GetComponent<AIStaticEnemyBrain>();
+            if (staticBrain != null)
+            {
+                //Respawn static enemy
 
-            //    if (damageable.CurrentHealth == 0 && agent.CompareTag("Player"))
-            //    {
-            //        agent.GetComponent<RespawnHelper>().RespawnPlayer();
-            //    }
-            //}
+                //damageable.Hit(1);
+
+                //if (damageable.CurrentHealth == 0 && agent.CompareTag("Player"))
+                //{
+                //    agent.GetComponent<RespawnHelper>().RespawnPlayer();
+                //}
+            }
 
             agent.AgentDied();
         }

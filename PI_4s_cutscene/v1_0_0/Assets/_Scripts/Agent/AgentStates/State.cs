@@ -54,7 +54,7 @@ public abstract class State : MonoBehaviour
 
     public virtual void HandleDie()
     {
-        //agent.TransitionToState(agent.stateFactory.GetState(StateType.Die));
+        agent.TransitionToState(agent.stateFactory.GetState(StateType.Die));
     }
 
     public void Exit()
