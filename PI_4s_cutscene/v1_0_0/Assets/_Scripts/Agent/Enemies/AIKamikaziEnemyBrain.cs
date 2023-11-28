@@ -30,6 +30,8 @@ public class AIKamikaziEnemyBrain : AIEnemyInput
 
     private void Start()
     {
+        lineRenderer.enabled = false;
+
         StartCoroutine(LockTargetCoroutine());        
     }
 
@@ -49,15 +51,24 @@ public class AIKamikaziEnemyBrain : AIEnemyInput
         }
     }
 
+    private void EnableLineRenderer()
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, agent.transform.position);
+
+        lineRenderer.SetPosition(1, lastPlayerPosition);
+    }
+
     IEnumerator LockTargetCoroutine()
     {
         playerDetector.OnDetectedTarget += RotateSprite;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         playerDetector.OnDetectedTarget -= RotateSprite;
 
         if (playerDetector.PlayerDetected)
         {
             lastPlayerPosition = playerDetector.Target.transform.position;
+
             StartCoroutine(ChaseCoroutine());
         }
         else
@@ -67,10 +78,14 @@ public class AIKamikaziEnemyBrain : AIEnemyInput
     }
     
     IEnumerator ChaseCoroutine()
-    {
+    {   
+        EnableLineRenderer();
+        yield return new WaitForSeconds(1);
+
         MovementDirection = (lastPlayerPosition - agent.transform.position).normalized;
         CallOnMovement(MovementDirection);
         yield return new WaitForSeconds(2);
+        lineRenderer.enabled = false;
         MovementDirection = Vector2.zero;
 
         StartCoroutine(LockTargetCoroutine());

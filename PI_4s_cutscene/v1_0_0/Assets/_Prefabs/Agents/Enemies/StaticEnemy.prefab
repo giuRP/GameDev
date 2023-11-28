@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: b93e1bc9574c33a4db3be3be22239ad5, type: 3}
     - target: {fileID: 2891017750398460977, guid: c2cfd4472fb6630489036204e71d3333, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2891017750398460977, guid: c2cfd4472fb6630489036204e71d3333, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -289,15 +289,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 01c6717aed726a941bd46e40c8d08931, type: 2}
     - target: {fileID: 4471999655437813810, guid: c2cfd4472fb6630489036204e71d3333, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4471999655437813810, guid: c2cfd4472fb6630489036204e71d3333, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4471999655437813810, guid: c2cfd4472fb6630489036204e71d3333, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4471999655437813810, guid: c2cfd4472fb6630489036204e71d3333, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -352,8 +352,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PlayerDetected>k__BackingField: 0
   detectorOrigin: {fileID: 3050809381362147421}
-  detectorSize: {x: 5, y: 12}
-  detectorOriginOffset: {x: -4.5, y: 6}
+  detectorSize: {x: 4.5, y: 12}
+  detectorOriginOffset: {x: -4, y: 6}
   detectionDelay: 0.3
   detectorLayerMask:
     serializedVersion: 2

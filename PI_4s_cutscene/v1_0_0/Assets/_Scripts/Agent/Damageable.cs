@@ -20,6 +20,12 @@ public class Damageable : MonoBehaviour, IHittable
         }
     }
 
+    public int MaxHealth
+    {
+        get => maxHealth;
+        set => maxHealth = value;
+    }
+
     public UnityEvent OnGetHit;
     public UnityEvent OnDie;
     public UnityEvent OnAddHealth;
